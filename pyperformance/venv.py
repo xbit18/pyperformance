@@ -9,7 +9,7 @@ from . import _utils, _pip, _venv
 REQUIREMENTS_FILE = os.path.join(
     os.path.dirname(__file__), 'requirements', 'requirements.txt'
 )
-PYPERF_OPTIONAL = ['psutil']
+PYPERF_OPTIONAL = []
 
 
 class Requirements(object):
@@ -229,9 +229,10 @@ class VenvForBenchmarks(_venv.VirtualEnvironment):
             if ec != 0:
                 raise RequirementsInstallationFailedError(root_dir)
         else:
+            
             version = pyperformance.__version__
             self.ensure_reqs([f'pyperformance=={version}'])
-            self._install_pyperf_optional_dependencies()
+            #self._install_pyperf_optional_dependencies()
 
     def _install_pyperf_optional_dependencies(self):
         for req in PYPERF_OPTIONAL:
@@ -249,7 +250,6 @@ class VenvForBenchmarks(_venv.VirtualEnvironment):
         elif hasattr(requirements, 'requirements_lockfile'):
             bench = requirements
             requirements = Requirements.from_benchmarks([bench])
-
         # Every benchmark must depend on pyperf.
         if bench is not None and not requirements.get('pyperf'):
             basereqs = Requirements.from_file(REQUIREMENTS_FILE)
@@ -262,6 +262,7 @@ class VenvForBenchmarks(_venv.VirtualEnvironment):
         if not requirements:
             print('(nothing to install)')
         else:
+            
             # install requirements
             super().ensure_reqs(
                 *requirements,
@@ -269,6 +270,7 @@ class VenvForBenchmarks(_venv.VirtualEnvironment):
             )
 
             if bench is not None:
+                print('--------------------------------------BENCH IS NOT NONE--------------------------------------')
                 self._install_pyperf_optional_dependencies()
 
         # Dump the package list and their versions: pip freeze

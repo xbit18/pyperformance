@@ -6,9 +6,9 @@
 #
 packaging==23.1
     # via -r requirements.in
-psutil==5.9.5
+#psutil==5.9.5
     # via
     #   -r requirements.in
     #   pyperf
-pyperf==2.6.3
+/home/xbit18/pyperf
     # via -r requirements.in

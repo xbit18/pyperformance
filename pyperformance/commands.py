@@ -58,6 +58,7 @@ def cmd_venv_create(options, root, python, benchmarks):
         sys.exit(f'ERROR: the virtual environment already exists at {root}')
 
     requirements = Requirements.from_benchmarks(benchmarks)
+
     venv = VenvForBenchmarks.ensure(
         root,
         python or sys.executable,
@@ -65,8 +66,10 @@ def cmd_venv_create(options, root, python, benchmarks):
     )
     venv.ensure_pip()
     try:
+        print('--------------------------------------INSTALL PYPERFORMANCE')
         venv.install_pyperformance()
         venv.ensure_reqs(requirements)
+        
     except _venv.RequirementsInstallationFailedError:
         sys.exit(1)
     print("The virtual environment %s has been created" % root)

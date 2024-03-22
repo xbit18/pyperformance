@@ -143,6 +143,7 @@ def install_requirements(reqs, *extra,
                          upgrade=True,
                          **kwargs
                          ):
+    print("---------------------------------------------------INSTALL REQS----------------------------")
     """Install the given packages from PyPI."""
     args = []
     if upgrade:
@@ -151,6 +152,12 @@ def install_requirements(reqs, *extra,
         if os.path.isfile(reqs) and reqs.endswith('.txt'):
             args.append('-r')  # --requirement
         args.append(reqs)
+    
+    if 'pyperformance==1.11.0' in args:
+        print("---------------------------------------------------ARGS----------------------------")
+        args = ['/home/xbit18/pyperformance']
+        print(args)
+    
     return run_pip('install', *args, **kwargs)
 
 
