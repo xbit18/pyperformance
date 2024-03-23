@@ -32,7 +32,6 @@ chameleon	<local>
 chaos	<local>
 comprehensions	<local>
 crypto_pyaes	<local>
-dask	<local>
 deepcopy	<local>
 deltablue	<local>
 django_template	<local>

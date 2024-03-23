@@ -66,7 +66,6 @@ def cmd_venv_create(options, root, python, benchmarks):
     )
     venv.ensure_pip()
     try:
-        print('--------------------------------------INSTALL PYPERFORMANCE')
         venv.install_pyperformance()
         venv.ensure_reqs(requirements)
         

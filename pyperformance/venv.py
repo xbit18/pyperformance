@@ -229,7 +229,7 @@ class VenvForBenchmarks(_venv.VirtualEnvironment):
             if ec != 0:
                 raise RequirementsInstallationFailedError(root_dir)
         else:
-            
+
             version = pyperformance.__version__
             self.ensure_reqs([f'pyperformance=={version}'])
             #self._install_pyperf_optional_dependencies()
@@ -245,6 +245,8 @@ class VenvForBenchmarks(_venv.VirtualEnvironment):
     def ensure_reqs(self, requirements=None):
         # parse requirements
         bench = None
+        print('-------------------------------------------PYPERF REQ------------------------------------')
+        print(requirements)
         if requirements is None:
             requirements = Requirements()
         elif hasattr(requirements, 'requirements_lockfile'):
@@ -254,9 +256,11 @@ class VenvForBenchmarks(_venv.VirtualEnvironment):
         if bench is not None and not requirements.get('pyperf'):
             basereqs = Requirements.from_file(REQUIREMENTS_FILE)
             pyperf_req = basereqs.get('pyperf')
-            if not pyperf_req:
-                raise NotImplementedError
-            requirements.specs.append(pyperf_req)
+            print('-------------------------------------------PYPERF REQ------------------------------------')
+            print(pyperf_req)
+            #if not pyperf_req:
+            #    raise NotImplementedError
+            requirements.specs.append('/home/xbit18/pyperf')
             # XXX what about psutil?
 
         if not requirements:
@@ -270,7 +274,6 @@ class VenvForBenchmarks(_venv.VirtualEnvironment):
             )
 
             if bench is not None:
-                print('--------------------------------------BENCH IS NOT NONE--------------------------------------')
                 self._install_pyperf_optional_dependencies()
 
         # Dump the package list and their versions: pip freeze
